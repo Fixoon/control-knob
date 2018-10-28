@@ -6,4 +6,4 @@ It works by listening for serial data sent by the Arduino and then doing things 
 
 I have only tested this on Windows 10 but might work on other platforms.
 
-To use this program you have to install all Node packages in packages.js, register an "app" at Spotify developers and paste the client id, secret and redirect URI in spotify.js.
+To use this program you have to install all dependencies in package.json, register an "app" at Spotify developers and paste the client id, secret and redirect URI in spotify.js.
