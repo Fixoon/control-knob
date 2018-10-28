@@ -1,0 +1,44 @@
+html
+  head
+    title Arduino Project control panel
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  body
+    .jumbotron.text-center
+      h1 Arduino Project
+    .container
+      h2 Serial communication
+      | This program works by reading serial data outputted by your Arduino.
+      | To control Spotify volume, output "0L" to lower volume and "0R"
+      | to increase volume. Then choose which COM port your Arduino is
+      | connected to below.
+      br
+      form(method="post" action="/com")
+        .form-row
+          .col-auto.my-1
+            label.col-form-label Port:
+          .col-auto.my-1
+            select.custom-select(name="portSelect")
+              each port in serialPorts
+                option(variable=port) #{port}
+          .col-auto.my-1
+            input.btn.btn-primary(type="submit", value="Select")
+      hr
+
+      h2 Spotify volume control
+      | Control playback volume of your Spotify account using the Spotify web API.
+      br
+      | Click
+      a(href='/login')  here
+      |  to connect your account.
+      hr
+
+      h2 Screen brightness
+      | You can control all your external monitors brightness if they support
+      | DDC/CI protocol.
+      hr
+
+      h3 Connctions:
+      | Serial port:
+      span.text-success  #{serialPort}
+      |  Spotify user:
+      span.text-success  #{user}
