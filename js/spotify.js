@@ -157,6 +157,13 @@ module.exports = class SpotifyAPI{
   }
 
   async lowerVolume(val){
+    if(isNaN(this.spotifyVolume)){
+      try{
+        this.spotifyVolume = await this.getVolume()
+      }catch(err){
+        console.log(err.statusCode)
+      }
+    }
     if(this.spotifyVolume != 0){
       if(this.spotifyVolume < val){
         this.spotifyVolume = 0
@@ -170,6 +177,13 @@ module.exports = class SpotifyAPI{
   }
 
   async increaseVolume(val){
+    if(isNaN(this.spotifyVolume)){
+      try{
+        this.spotifyVolume = await this.getVolume()
+      }catch(err){
+        console.log(err.statusCode)
+      }
+    }
     if(this.spotifyVolume != 100){
       if(this.spotifyVolume > 100 - val){
         this.spotifyVolume = 100
