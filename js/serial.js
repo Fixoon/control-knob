@@ -25,7 +25,7 @@ module.exports = class Serial{
 
   async changeActiveSerialPort(newPort){
     if(this.portName != newPort){
-      if(this.portName !== undefined){
+      if(this.portName !== undefined && this.port.isOpen){
         this.close()
       }
       this.open(newPort)
