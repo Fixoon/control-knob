@@ -5,6 +5,7 @@ const Spotify = require('./js/spotify')
 const Serial = require('./js/serial')
 const Brightness = require('./js/brightness')
 const Cache = require('./js/cache')
+const Schedule = require('./js/schedule')
 const path = require('path')
 
 
@@ -14,6 +15,7 @@ class main{
     this.serial = new Serial()
     this.brightness = new Brightness()
     this.cache = new Cache()
+    this.schedule = new Schedule()
 
     this.app = express()
 
@@ -33,6 +35,7 @@ class main{
       }
 
       await this.spotify.init()
+      this.schedule.init()
     }else{
       this.cache.createCache()
     }
@@ -49,7 +52,7 @@ class main{
     this.app.use(bodyParser.urlencoded({ extended: true }))
 
     this.app.get('/', (req, res) => {
-      res.render('index', { user: this.spotify.user , serialPorts: serialPorts, serialPort: this.serial.portName})
+      res.render('index', { user: this.spotify.user , serialPorts: serialPorts, serialPort: this.serial.portName, commands: [this.schedule.timeStamps, this.schedule.values]})
     })
 
     this.app.get("/login", this.spotify.authRedirect.bind(this.spotify))
@@ -66,6 +69,17 @@ class main{
 
       this.cache.setSerialPort(req.body.portSelect)
 
+      res.redirect("/")
+    })
+
+    this.app.post('/command', async (req, res) => {
+      var commandTime = req.body.commandTime.replace(/:/g,'')
+      this.schedule.addNewCommand(Number(commandTime), Number(req.body.commandValue), req.body.commandTime)
+      res.redirect("/")
+    })
+
+    this.app.get("/deletecommand", async (req, res) => {
+      this.schedule.removeCommand(req.query.index)
       res.redirect("/")
     })
 

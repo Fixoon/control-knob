@@ -3,9 +3,25 @@ const fs = require("fs")
 module.exports = class Cache{
 
   createCache(){
-    const content = {refresh_token: "", user: "", serial_port: ""}
+    const content = {refresh_token: "", user: "", serial_port: "", commands: ""}
     const contentJSON = JSON.stringify(content)
     fs.writeFile("./cache", contentJSON, function(err){})
+  }
+
+  setCommands(commands){
+    return new Promise((resolve, reject) => {
+      fs.readFile('./cache', 'utf-8', function(err, data){
+        let json = JSON.parse(data)
+
+        json.commands = commands
+
+        json = JSON.stringify(json)
+
+        fs.writeFile('./cache', json, 'utf-8', function (err) {
+          resolve()
+        })
+      })
+    })
   }
 
   setSerialPort(port) {
@@ -52,6 +68,20 @@ module.exports = class Cache{
         fs.writeFile('./cache', json, 'utf-8', function (err) {
           resolve()
         })
+      })
+    })
+  }
+
+  getCommands(){
+    return new Promise((resolve, reject) => {
+      fs.readFile('./cache', 'utf-8', function(err, data){
+        let json = JSON.parse(data)
+
+        if(json.commands == ""){
+          reject("Serial port not defined")
+        }else{
+          resolve(json.commands)
+        }
       })
     })
   }
