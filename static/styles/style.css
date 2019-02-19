@@ -1,0 +1,179 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,300);
+* {
+  box-sizing: border-box;
+  font-family: "Roboto";
+  color: #616161;
+  font-weight: 400;
+}
+body {
+  background: #f9f9f9;
+}
+p {
+  font-weight: 300;
+  margin: 0;
+  font-size: 17px;
+  line-height: 22px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  color: #3d3d3d;
+}
+h1 {
+  font-size: 42px;
+  margin: 20px 0;
+  text-align: center;
+}
+h2 {
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+a {
+  text-decoration: none;
+  font-weight: 400;
+}
+a:hover {
+  color: #929292;
+}
+b {
+  font-weight: 700;
+}
+input,
+select,
+label {
+  float: left;
+  margin-right: 10px;
+  height: 32px;
+}
+label {
+  line-height: 32px;
+}
+input,
+select {
+  outline: none;
+  border: 1px solid #aaa;
+  background: #fff;
+  padding: 4px 8px;
+  border-radius: 2px;
+  font-size: 14px;
+}
+input[type=text] {
+  width: 62px;
+}
+input[type=text]:hover,
+select:hover {
+  background: #f4f4f4;
+}
+input[type=submit] {
+  border-color: #7ba5f0;
+  background: #6495ed;
+  color: #fff;
+  font-weight: 400;
+}
+input[type=submit]:hover {
+  cursor: pointer;
+  background: #7ba5f0;
+}
+option {
+  background: #fff;
+}
+form {
+  float: left;
+  width: 100%;
+  margin: 0 0 12px 0;
+}
+/* MAIN DIVS */
+.outer {
+  width: 100%;
+}
+.inner {
+  width: 1300px;
+  margin: 0 auto;
+}
+/* COLUMN SYSTEM */
+.boxrow {
+  float: left;
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+}
+.box {
+  width: 32.5%;
+  float: left;
+  padding: 1em;
+  background: #fff;
+  border: 1px solid #e4e4e4;
+}
+.box:nth-of-type(even) {
+  margin: 0 1.125%;
+}
+/* SERIAL BOX */
+.serial:before {
+  content: "";
+  background: url("../images/usb.svg");
+  background-size: 34px;
+  display: block;
+  float: left;
+  width: 34px;
+  height: 34px;
+  margin-right: 10px;
+}
+/* SPOTIFY BOX */
+.spotify:before {
+  content: "";
+  background: url("../images/spotify-icon-green.png");
+  background-size: 34px;
+  display: block;
+  float: left;
+  width: 34px;
+  height: 34px;
+  margin-right: 10px;
+}
+/* BRIGHTNESS BOX */
+.brightness:before {
+  content: "";
+  background: url("../images/brightness.svg");
+  background-size: 34px;
+  display: block;
+  float: left;
+  width: 34px;
+  height: 34px;
+  margin-right: 10px;
+}
+/* SCHEDULE BOX */
+.schedule:before {
+  content: "";
+  background: url("../images/calendar-clock.svg");
+  background-size: 34px;
+  display: block;
+  float: left;
+  width: 34px;
+  height: 34px;
+  margin-right: 10px;
+}
+.commands {
+  width: 100%;
+  float: left;
+  height: 24px;
+  line-height: 24px;
+}
+.commands span {
+  line-height: 26px;
+  float: left;
+}
+.commands a {
+  float: left;
+  height: 24px;
+  width: 20px;
+  background: url("../images/close.svg") center no-repeat;
+  background-size: 23px;
+  margin-left: 6px;
+}
+.commands a:hover {
+  background: url("../images/close-hover.svg") center no-repeat;
+  background-size: 23px;
+}
