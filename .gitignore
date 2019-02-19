@@ -1,6 +1,8 @@
 # Custom
 cache
 .tern-project
+start.vbs
+save-commands.json
 
 # Logs
 logs
