@@ -50,6 +50,7 @@ class main{
     this.app.set('views', path.join(__dirname, 'views'))
     this.app.set("view engine", "pug")
     this.app.use(bodyParser.urlencoded({ extended: true }))
+    this.app.use('/static', express.static('static'))
 
     this.app.get('/', (req, res) => {
       res.render('index', { user: this.spotify.user , serialPorts: serialPorts, serialPort: this.serial.portName, commands: [this.schedule.timeStamps, this.schedule.values]})
