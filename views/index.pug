@@ -1,68 +1,68 @@
 html
   head
-    title Arduino Project control panel
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    style(type="text/css").
-      ::-webkit-clear-button, ::-webkit-inner-spin-button {
-          display: none;
-      }
+    title Control Knob Control Panel
+    <link rel="stylesheet" href="../static/styles/style.css">
   body
-    .jumbotron.text-center
-      h1 Control Knob
-    .container
-      h2 Serial communication
-      | This program works by reading serial data outputted by your Arduino.
-      | The command for left rotation is "0L" and right rotation is "0R". The 
-      | command for button down is "0D" and up is "0U". When you are done on the 
-      | Arduino side, choose which port the Arduino is connected to below.
-      br
-      form(method="post" action="/com")
-        .form-row
-          .col-auto.my-1
-            label.col-form-label Port:
-          .col-auto.my-1
-            select.custom-select(name="portSelect")
-              each port in serialPorts
-                option(variable=port) #{port}
-          .col-auto.my-1
-            input.btn.btn-primary(type="submit", value="Select")
-      hr
+    .outer
+      .inner
+        h1 Control Knob Control Panel
+    .outer
+      .inner
+        .boxrow
+          .box#serial
+            h2.serial Arduino Communication
+            p
+              | To read the data sent by your Arduino you need to select the 
+              | serial port your Arduino is using. Select the port from the 
+              | list below.
+            br
+            form(method="post" action="/com")
+              label Port:
+              select(name="portSelect")
+                each port in serialPorts
+                  option(variable=port) #{port}
+              input(type="submit", value="Select")
 
-      h2 Spotify volume control
-      | Control playback volume of your Spotify account using the Spotify web API.
-      br
-      | Click  
-      a(href='/login') here
-      |  to connect your account.
-      hr
+            span.status Selected port: #{serialPort}
+          .box#spotify
+            h2.spotify Spotify Volume
+            p
+              | To control the sound volume on Spotify using the Spotify web API 
+              | you need to connect your Spotify account.
+              | Click  
+              a(href='/login') here
+              |  to connect your account.
+            br
+            span.status Connected user:  #{user}
+          .box#brightness
+            h2.brightness Screen Brightness
+            p
+              | To control monitor brightness your monitor needs to support the
+              | DDC/CI protocol. Also make sure it's enabled in your monitors 
+              | settings.
+              br
+              br
+              | Disclaimer: it might stutter if you're changing the brightness too
+              | fast. It's either a DDC/CI or monitor limitation.
+        .boxrow
+          .box#schedule
+            h2.schedule Schedule Brightness
+            p
+              | You can set brightness levels for different times of the day below.
+            br
+            form(method="post" action="/command")
+              label Time:
 
-      h2 Screen brightness
-      | You can control all your external monitors brightness if they support
-      | DDC/CI protocol.
-      hr
-        
-      h2 Schedule brightness
-      | Here you can schedule brightness changes.
-      form(method="post" action="/command")
-        .form-row
-          .col-auto.my-1
-            label.col-form-label Time:
-          .col-auto.my-1
-            input.form-control(type="time", required="required", name="commandTime")
-          .col-auto.my-1
-            label.col-form-label Brightness:
-          .col-auto.my-1
-            input.form-control(type="number", min="0", max="100", required="required", name="commandValue")
-          .col-auto.my-1
-            input.btn.btn-primary(type="submit", value="Submit")
-      each command, index in commands[0]
-        span #{index+1}. #{commands[0][index]} @ #{commands[1][index]} % 
-        a(href='/deletecommand?index=' + index) Remove
-        br
-      hr
+              input(type="text", placeholder="hh:mm", required="required", autocomplete="off", name="commandTime")
 
-      h2 Connections:
-      | Serial port:
-      span.text-success  #{serialPort}
-      |  Spotify user:
-      span.text-success  #{user}
+              label Brightness:
+
+              input(type="text", placeholder="0-100", required="required", autocomplete="off", name="commandValue")
+
+              input(type="submit", value="Submit")
+
+            each command, index in commands[0]
+              div.commands
+                span.command  <b>#{index+1}.</b> #{commands[0][index]} - #{commands[1][index]} % 
+                a(href='/deletecommand?index=' + index, title="Remove scheduling")
+          
