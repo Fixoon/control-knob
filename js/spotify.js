@@ -7,9 +7,9 @@ module.exports = class SpotifyAPI{
   constructor(){
     this.cache = new Cache()
 
-    this.client_id = ""
-    this.client_secret = ""
-    this.redirect_uri = ""
+    this.client_id = process.env.CLIENT_ID
+    this.client_secret = process.env.CLIENT_SECRET
+    this.redirect_uri = "http://localhost:8888/callback"
     this.scope = "user-modify-playback-state%20user-read-playback-state"
 
     this.ref_token
