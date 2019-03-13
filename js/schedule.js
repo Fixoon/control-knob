@@ -36,12 +36,12 @@ module.exports = class Schedule{
   }
 
   checkForPreviousCommands(){
-    var currentTime = this.getTime()
-    var newBrightness = null
-    var latestTime = 0
+    const currentTime = this.getTime()
+    let newBrightness = null
+    let latestTime = 0
 
-    for(var i = 0; i < this.times.length; i++){
-      var time = this.times[i]
+    for(let i = 0; i < this.times.length; i++){
+      const time = this.times[i]
       if(time < currentTime){
         if(time > latestTime){
           latestTime = time
@@ -55,9 +55,9 @@ module.exports = class Schedule{
   }
 
   checkForCommands(){
-    var currentTime = this.getTime()
+    const currentTime = this.getTime()
 
-    for(var i = 0; i < this.times.length; i++){
+    for(let i = 0; i < this.times.length; i++){
       if(this.times[i] == currentTime){
         this.brightness.setAllMonitorsBrightness(this.values[i])
       }
@@ -67,14 +67,16 @@ module.exports = class Schedule{
   }
 
   getTime(){
-    var date = new Date()
-    var minutes = 0
+    const date = new Date()
+    let minutes = 0
+
     if(date.getMinutes() < 10){
       minutes = "0" + date.getMinutes()
     }else{
       minutes = date.getMinutes()
     }
-    var formattedDate = `${date.getHours()}${minutes}`
+
+    const formattedDate = `${date.getHours()}${minutes}`
     return Number(formattedDate)
   }
 }

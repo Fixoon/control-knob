@@ -47,7 +47,7 @@ module.exports = class SpotifyAPI{
     let text = ""
     const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
-    for (var i = 0; i < length; i++) {
+    for (let i = 0; i < length; i++) {
       text += possible.charAt(Math.floor(Math.random() * possible.length))
     }
 
@@ -79,7 +79,7 @@ module.exports = class SpotifyAPI{
       }
 
       try{
-        var response = await rp.post(options)
+        const response = await rp.post(options)
         this.acc_token = response.access_token
         this.ref_token = response.refresh_token
 
@@ -97,7 +97,7 @@ module.exports = class SpotifyAPI{
   }
 
   async getUser(){
-    var options = {
+    const options = {
       url: 'https://api.spotify.com/v1/me',
       headers: { 'Authorization': 'Bearer ' + this.acc_token },
       json: true
@@ -126,7 +126,7 @@ module.exports = class SpotifyAPI{
   async setVolume(vol){
     console.log("Setting volume to: " + vol)
 
-    var options = {
+    const options = {
       url: "https://api.spotify.com/v1/me/player/volume?volume_percent=" + vol,
       headers: { "Authorization": "Bearer " + this.acc_token }
     }

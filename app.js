@@ -74,7 +74,7 @@ class main{
     })
 
     this.app.post('/command', async (req, res) => {
-      var commandTime = req.body.commandTime.replace(/:/g,'')
+      const commandTime = req.body.commandTime.replace(/:/g,'')
       this.schedule.addNewCommand(Number(commandTime), Number(req.body.commandValue), req.body.commandTime)
       res.redirect("/")
     })
