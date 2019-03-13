@@ -68,7 +68,13 @@ module.exports = class Schedule{
 
   getTime(){
     var date = new Date()
-    var formattedDate = `${date.getHours()}${date.getMinutes()}`
+    var minutes = 0
+    if(date.getMinutes() < 10){
+      minutes = "0" + date.getMinutes()
+    }else{
+      minutes = date.getMinutes()
+    }
+    var formattedDate = `${date.getHours()}${minutes}`
     return Number(formattedDate)
   }
 }
